@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>🛠️ 管理員後台 - 預約管理</h2>
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>日期</th>
+            <th>討論室</th>
+            <th>時段</th>
+            <th>預約人 (學號)</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for b in bookings %}
+        <tr>
+            <td>{{ b.booking_date }}</td>
+            <td>討論室 {{ b.room_number }}</td>
+            <td>
+                {{ time_slots[b.start_index] }} - {{ time_slots[b.start_index + b.duration_slots] }}
+            </td>
+            <td>{{ b.user.name }} ({{ b.user.student_id }})</td>
+            <td>
+                <a href="{{ url_for('delete_booking', id=b.id) }}" class="btn btn-danger btn-sm" onclick="return confirm('確定要刪除嗎？')">刪除</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

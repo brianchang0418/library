@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-3">
+    <div class="col-md-8">
+        <h2>📅 討論室預約狀況</h2>
+    </div>
+    <div class="col-md-4 text-end">
+        <form action="{{ url_for('index') }}" method="GET" class="d-flex">
+            <input type="date" name="date" class="form-control me-2" value="{{ date }}" onchange="this.form.submit()">
+        </form>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered text-center align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th style="width: 10%;">時間 / 房號</th>
+                {% for i in range(1, 7) %}
+                    <th style="width: 15%;">討論室 {{ i }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for t_idx in range(time_slots|length - 1) %}
+            <tr>
+                <td class="bg-light fw-bold">{{ time_slots[t_idx] }} - {{ time_slots[t_idx+1] }}</td>
+                {% for r_idx in range(6) %}
+                    {% if room_status[r_idx][t_idx] %}
+                        <td class="booked">
+                            已預約<br><small>({{ room_status[r_idx][t_idx] }})</small>
+                        </td>
+                    {% else %}
+                        <td class="free"></td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

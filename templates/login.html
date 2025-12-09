@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <div class="card mt-5">
+            <div class="card-body">
+                <h3 class="text-center mb-4">登入系統</h3>
+                <form method="POST">
+                    <div class="mb-3">
+                        <label>學號</label>
+                        <input type="text" name="student_id" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>密碼</label>
+                        <input type="password" name="password" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">登入</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

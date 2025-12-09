@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h4>📝 預約登記</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">選擇日期</label>
+                        <input type="date" name="date" class="form-control" min="{{ today }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">選擇討論室</label>
+                        <select name="room" class="form-select" required>
+                            {% for i in range(1, 7) %}
+                                <option value="{{ i }}">討論室 {{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">開始時間</label>
+                        <select name="start_time" class="form-select" required>
+                            {% for i in range(time_slots|length - 1) %}
+                                <option value="{{ i }}">{{ time_slots[i] }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">預約時長</label>
+                        <select name="duration" class="form-select" required>
+                            <option value="1">30 分鐘</option>
+                            <option value="2">1 小時</option>
+                            <option value="3">1.5 小時</option>
+                            <option value="4">2 小時</option>
+                        </select>
+                        <div class="form-text">最少30分鐘，最長2小時，必須連續。</div>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success">確認預約</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
